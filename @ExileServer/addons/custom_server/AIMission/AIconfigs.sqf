@@ -276,7 +276,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["10Rnd_127x54_Mag",1,4],
 				["10Rnd_93x64_DMR_05_Mag" ,1,4],
 				["10Rnd_93x64_DMR_05_Mag" ,1,4]				
-			],			
+			],
 			[  // Optics
 				["optic_SOS",1,2],["optic_LRPS",1,2],["optic_DMS",1,2],["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Holosight",1,3],["acc_flashlight",1,3],["acc_pointer_IR",1,3],
 				["optic_Arco",1,3],["optic_Hamr",1,3],["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Aco_smg",1,3],["optic_ACO_grn_smg",1,3],
@@ -284,6 +284,11 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["optic_MRD",1,3],["optic_LRPS",1,3],["optic_NVS",1,3],["optic_Nightstalker",1,2],["optic_Nightstalker",1,2],["optic_Nightstalker",1,2],
 				["optic_tws",1,3],["optic_tws_mg",1,3],["muzzle_snds_H",1,3],["muzzle_snds_L",1,3],["muzzle_snds_M",1,3],["muzzle_snds_B",1,3],["muzzle_snds_H_MG",1,3],["muzzle_snds_acp",1,3],
 				["optic_AMS_khk",1,3],["optic_AMS_snd",1,3],["optic_KHS_blk",1,3],["optic_KHS_hex",1,3],["optic_KHS_old",1,3],["optic_KHS_tan",1,3]
+			],
+			[	// Basebuilding stuff
+				["Exile_Item_WoodFloorKit",4,12],
+				["Exile_Item_WoodWallKit",10,20],
+				["Exile_Item_WoodPlank",1,50]
 			],
 			[//Items
 				["Rangefinder",1,3]
@@ -368,6 +373,11 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["optic_tws",1,3],["optic_tws_mg",1,3],["muzzle_snds_H",1,3],["muzzle_snds_L",1,3],["muzzle_snds_M",1,3],["muzzle_snds_B",1,3],["muzzle_snds_H_MG",1,3],["muzzle_snds_acp",1,3],
 				["optic_AMS_khk",1,3],["optic_AMS_snd",1,3],["optic_KHS_blk",1,3],["optic_KHS_hex",1,3],["optic_KHS_old",1,3],["optic_KHS_tan",1,3]
 			],
+			[	// Basebuilding stuff
+				["Exile_Item_WoodFloorKit",4,12],
+				["Exile_Item_WoodWallKit",10,20],
+				["Exile_Item_WoodPlank",1,50]
+			],
 			[//Items
 				["Rangefinder",1,3]
 			],
@@ -451,6 +461,11 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["optic_tws",1,3],["optic_tws_mg",1,3],["muzzle_snds_H",1,3],["muzzle_snds_L",1,3],["muzzle_snds_M",1,3],["muzzle_snds_B",1,3],["muzzle_snds_H_MG",1,3],["muzzle_snds_acp",1,3],
 				["optic_AMS_khk",1,3],["optic_AMS_snd",1,3],["optic_KHS_blk",1,3],["optic_KHS_hex",1,3],["optic_KHS_old",1,3],["optic_KHS_tan",1,3]
 			],
+			[	// Basebuilding stuff
+				["Exile_Item_WoodFloorKit",4,12],
+				["Exile_Item_WoodWallKit",10,20],
+				["Exile_Item_WoodPlank",1,50]
+			],
 			[//Items
 				["Rangefinder",1,3]
 			],
@@ -533,6 +548,11 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["optic_MRD",1,3],["optic_LRPS",1,3],["optic_NVS",1,3],["optic_Nightstalker",1,2],["optic_Nightstalker",1,2],["optic_Nightstalker",1,2],
 				["optic_tws",1,3],["optic_tws_mg",1,3],["muzzle_snds_H",1,3],["muzzle_snds_L",1,3],["muzzle_snds_M",1,3],["muzzle_snds_B",1,3],["muzzle_snds_H_MG",1,3],["muzzle_snds_acp",1,3],
 				["optic_AMS_khk",1,3],["optic_AMS_snd",1,3],["optic_KHS_blk",1,3],["optic_KHS_hex",1,3],["optic_KHS_old",1,3],["optic_KHS_tan",1,3]
+			],
+			[	// Basebuilding stuff
+				["Exile_Item_WoodFloorKit",4,12],
+				["Exile_Item_WoodWallKit",10,20],
+				["Exile_Item_WoodPlank",1,50]
 			],
 			[//Items
 				["Rangefinder",1,3]
