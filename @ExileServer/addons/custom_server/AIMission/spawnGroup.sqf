@@ -26,7 +26,7 @@ if (_numai2 > _numai1) then {
 };
 
 //Creates a group to make them attack players
-_aiGroup = createGroup INDEPENDENT;	
+_aiGroup = createGroup EAST;	
 _aiGroup setcombatmode blck_combatMode;
 _aiGroup allowfleeing 0;
 _aiGroup setspeedmode "FULL";
