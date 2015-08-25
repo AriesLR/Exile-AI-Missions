@@ -140,6 +140,16 @@ if ( (typeOf vehicle _killer) in blck_forbidenVehicles or (currentWeapon _killer
 		[vehicle _killer] call fn_applyVehicleDamage;
 	};   
 };
+
+	_newKillerScore = _killer getVariable ["ExileScore", 0];
+	_newKillerScore = _newKillerScore + blck_RespectGain;
+	_killer setVariable ["ExileScore", _newKillerScore];
+	format["setAccountScore:%1:%2", _newKillerScore,getPlayerUID _killer] call ExileServer_system_database_query_fireAndForget;
+	if (blck_brdcstkills) then {
+		_killMessage = format ["AI was killed by %2. %1 respect gained", blck_RespectGain, (name _killer)];
+		["systemChatRequest", [_killMessage]] call ExileServer_system_network_send_broadcast;
+	};
+
 // unit cleanup depends on epoch cleanup; this code was left in the event that the epoch-cleanup approach no longer works properly.
 /*
 _unit spawn {

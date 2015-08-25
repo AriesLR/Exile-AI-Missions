@@ -104,7 +104,11 @@ Last modified 8/1/15
 	blck_AIAlertDistance = [150,225,250,300];
 	// How precisely player locations will be revealed to AI after an AI kill
 	// values are ordered as follows [blue, red, green, orange];
-	blck_AIIntelligence = [0.5, 1, 2, 4];  
+	blck_AIIntelligence = [0.5, 1, 2, 4];
+	// Exile Respect points gained per AI kill
+	blck_RespectGain = 150;
+	// Broadcasted killmessages for AI kills. true / false
+	blck_brdcstkills = true;
 
 	/***************************************************************
 	
