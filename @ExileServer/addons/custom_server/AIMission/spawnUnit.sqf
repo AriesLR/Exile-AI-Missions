@@ -112,7 +112,7 @@ if (_Launcher != "none") then
 
 if(sunOrMoon < 0.2 && blck_useNVG)then
 {
-	_ai1 addWeapon "NVG_EPOCH";
+	_ai1 addWeapon "NVGoggles";
 	_ai1 setVariable ["hasNVG", true];
 }
 else

@@ -47,7 +47,7 @@ if (blck_useNVG) then
 {
 	if (_unit getVariable ["hasNVG",false]) then
 	{
-		_unit unassignitem "NVG_EPOCH"; _unit removeweapon "NVG_EPOCH";
+		_unit unassignitem "NVGoggles"; _unit removeweapon "NVGoggles";
 	};
 };
 //diag_log format["[AIKilled.sqf] --- >>> unit %1 killed",_unit];
