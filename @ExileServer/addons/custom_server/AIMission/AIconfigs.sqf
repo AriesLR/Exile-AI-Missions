@@ -15,7 +15,7 @@ Last modified 8/1/15
 	blck_locationBlackList = [
 	//Add location as [xpos,ypos,0],minimumDistance],
 	// Note that there should not be a comma after the last item in this table
-		[[0,0,0],0]
+		[[14566,16773,0],900]
 	];
 	
 	/***********************************************************
