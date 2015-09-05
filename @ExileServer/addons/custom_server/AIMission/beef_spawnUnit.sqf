@@ -6,15 +6,33 @@
 */
 
 //Defines private variables so they don't interfere with other scripts
-private ["_pos","_i","_weap","_ammo","_other","_skin","_aiGroup","_ai1","_magazines","_players","_owner","_ownerOnline","_nearEntities","_skillLevel","_aiSkills","_specialItems",
-		"_Launcher","_launcherRound","_vest","_index","_WeaponAttachments","_Meats","_Drink","_Food","_aiConsumableItems","_weaponList","_ammoChoices","_attachment","_attachments"];
+private ["_pos","_i","_weapon","_ammo","_other","_skin","_aiGroup","_ai1","_magazines","_players","_owner","_ownerOnline","_nearEntities","_skillLevel","_aiSkills","_specialItems",
+		"_Launcher","_launcherRound","_vest","_index","_weapononAttachments","_Meats","_Drink","_Food","_aiConsumableItems","_weapononList","_ammoChoices","_attachment","_attachments","_backpack"];
 
-_WeaponAttachments = [
+_pos = _this select 0;  // Position at which to spawn AI
+_weapononList = _this select 1;
+_aiGroup = _this select 2;  // Group to which AI belongs
+_skillLevel = [_this,3,"red"] call BIS_fnc_param;   // Assign a skill level in case one was not passed."blue", "red", "green", "orange"
+_Launcher = [_this, 4, "none"] call BIS_fnc_param; // Set launchers to "none" if no setting was passed.
+_skin = _this select 5;
+_vest = _this select 6;
+_weapon = _this select 7;
+_backpack = _this select 8;
+
+_weapononAttachments = [
 "acc_flashlight","acc_pointer_IR","optic_Arco","optic_Hamr","optic_Aco","optic_ACO_grn","optic_Aco_smg","optic_ACO_grn_smg","optic_Holosight","optic_Holosight_smg","optic_SOS",
 "optic_MRCO","optic_DMS","optic_Yorris","optic_MRD","optic_LRPS","optic_NVS","optic_Nightstalker","optic_tws","optic_tws_mg","muzzle_snds_H","muzzle_snds_L","muzzle_snds_M",
 "muzzle_snds_B","muzzle_snds_H_MG","muzzle_snds_acp"
 ];
-//CraftingFood
+/*//CraftingFood
+_Meats=[
+	"Exile_Item_GloriousKnakworst",
+	"Exile_Item_SausageGravy",
+	"Exile_Item_ChristmasTinner",
+	"Exile_Item_BBQSandwich",
+	"Exile_Item_Surstromming",
+	"Exile_Item_Catfood"
+];
 _Drink = [
 	"Exile_Item_PlasticBottleFreshWater",
 	"Exile_Item_Beer",
@@ -28,22 +46,18 @@ _Food = [
 	"Exile_Item_Surstromming",
 	"Exile_Item_Catfood"
 ];
-_aiConsumableItems = _Drink + _Food;
+_aiConsumableItems = _Meats + _Drink + _Food;*/
 
-_pos = _this select 0;  // Position at which to spawn AI
-_weaponList = _this select 1;
-_aiGroup = _this select 2;  // Group to which AI belongs
-_skillLevel = [_this,3,"red"] call BIS_fnc_param;   // Assign a skill level in case one was not passed."blue", "red", "green", "orange"
-_Launcher = [_this, 4, "none"] call BIS_fnc_param; // Set launchers to "none" if no setting was passed.
+
 
 _ai1 = ObjNull;
 "i_g_soldier_unarmed_f" createUnit [_pos, _aiGroup, "_ai1 = this", 0.7, "COLONEL"];
 [_ai1] call blck_removeGear;
-_skin = blck_SkinList call BIS_fnc_selectRandom;
+//_skin = blck_SkinList call BIS_fnc_selectRandom;
 _ai1 forceAddUniform _skin;
 
 //Stops the AI from being cleaned up
-_ai1 setVariable["LASTLOGOUT_EPOCH",14400]; //Not sure if this is breaking or fixing anything in Exile...
+//_ai1 setVariable["LASTLOGOUT_EPOCH",14400]; //Not sure if this is breaking or fixing anything in Exile...
 _ai1 setVariable["LAST_CHECK",14400];
 
 //Sets AI Tactics
@@ -59,15 +73,15 @@ _ai1 setunitpos "AUTO";
 uiSleep 0.2; //For some reason without this sometimes they don't spawn the weapon on them
 
 // Add a vest to AI for storage
-_vest = blck_vests call BIS_fnc_selectRandom;
+//_vest = blck_vests call BIS_fnc_selectRandom;
 _ai1 addVest _vest;
 
 // Add a primary weapon : Vampires logic used here.
-_weap = _weaponList call BIS_fnc_selectRandom;
-//diag_log format["[spawnUnit.sqf] _weap os %1",_weap];
-_ai1 addWeaponGlobal  _weap; 
+//_weapon = _weapononList call BIS_fnc_selectRandom;
+//diag_log format["[spawnUnit.sqf] _weapon os %1",_weapon];
+_ai1 addWeaponGlobal _weapon; 
 // get the ammo that can be used with this weapon. This function returns an array with all possible ammo choices in it.
-_ammoChoices = getArray (configFile >> "CfgWeapons" >> _weap >> "magazines");
+_ammoChoices = getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines");
 _ammo = _ammoChoices call BIS_fnc_selectRandom;
 //diag_log format["[spawnUnit.sqf] _ammo returned as %1",_ammo];
 for "_i" from 0 to (floor(random 3)) do {
@@ -75,16 +89,18 @@ for "_i" from 0 to (floor(random 3)) do {
 };
 
 // If the weapon has a GL, add some rounds for it: based on Vampires code
-if ((count(getArray (configFile >> "cfgWeapons" >> _weap >> "muzzles"))) > 1) then {
+if ((count(getArray (configFile >> "cfgWeapons" >> _weapon >> "muzzles"))) > 1) then {
 	_ai1 addMagazine "1Rnd_HE_Grenade_shell";
 };
 
 uiSleep 0.2; //For some reason without this sometimes they don't spawn the weapon on them
 
-//adds 1 random items to AI at a 70% chance.  _other = ["ITEM","COUNT"]
-if (random 1 <= 0.4) then {
+/*//adds 3 random items to AI.  _other = ["ITEM","COUNT"]
+_i = 0;
+while {_i < 3} do {
+	_i = _i + 1;
 	_ai1 addItem (_aiConsumableItems call BIS_fnc_selectRandom);
-};
+};*/
 
 // Add an FAK or Grenade 50% of the time
 if (round(random 10) <= 9) then 
@@ -97,9 +113,8 @@ if (round(random 10) <= 9) then
 };
 if (_Launcher != "none") then
 {
-	private["_bpck"];
-	_bpck = blck_backpack call BIS_fnc_selectRandom;
-	_ai1 addBackpack _bpck; 
+	//_backpack = blck_backpack call BIS_fnc_selectRandom;
+	_ai1 addBackpack _backpack; 
 	//diag_log format["spawnUnit.sqf:  Available Launcher Rounds are %1",getArray (configFile >> "CfgWeapons" >> _Launcher >> "magazines")];
 	_ai1 addWeaponGlobal _Launcher;
 	_launcherRound = getArray (configFile >> "CfgWeapons" >> _Launcher >> "magazines") select 0;
@@ -107,7 +122,7 @@ if (_Launcher != "none") then
 	for "_i" from 1 to 3 do 
 	{
 		//diag_log format["[spawnUnit.saf] Adding Launcher Round %1 ",_launcherRound];
-		_ai1 addItemToBackpack  _launcherRound call BIS_fnc_selectRandom;
+		_ai1 addItemToBackpack _launcherRound call BIS_fnc_selectRandom;
 	};
 	_ai1 selectWeapon (secondaryWeapon _ai1);
 };
@@ -124,8 +139,6 @@ else
 
 // Infinite ammo
 _ai1 addeventhandler ["fired", {(_this select 0) setvehicleammo 1;}];
-
-[2,format["[SpawnUnit.sqf] Unit %1 created with skin %2, vest %3, weapon %4",_ai1,_skin,_vest,_weap]] call beef_fncUtil_Log;
 
 // Do something if AI is killed
 _ai1 addEventHandler ["Killed",{ [(_this select 0), (_this select 1)] execVM blck_EH_AIKilled;}]; // changed to reduce number of concurrent threads, but also works as spawn blck_AIKilled; }];

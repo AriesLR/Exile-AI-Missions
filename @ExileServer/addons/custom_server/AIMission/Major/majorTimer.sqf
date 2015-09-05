@@ -7,7 +7,7 @@
 // Loop to spawn Orange (Major) missions at intervals specified by blck_TMin_Major and blck_TMax_Major
 
 private ["_coords","_allAIGroups","_mission","_MajorMissions","_oldAI"];
-diag_log "[blckeagls] Orange mission timer started";
+[0,"[majorTimer.sqf] ORANGE mission timer started"] call beef_fncUtil_Log;
 // Use a global variable to store a list of AI units associated with this mission
 if (isNil "blck_AIMajor") then { blck_AIMajor = [];};
 
@@ -27,12 +27,12 @@ while {true} do {
 	_mission = _MajorMissions call BIS_fnc_selectRandom;
 	// Everything is ready, time to spawn the mission
 	blck_MissionGoMajor = true;
-	[_coords] execVM format["\q\addons\custom_server\AIMission\Major\%1.sqf",_mission];
+	[_coords] execVM format["%1\AIMission\Major\%2.sqf",BLCK_directory,_mission];
 	// Wait until the mission script has ended. It should toggle MissionGoMajor to false so that the loop will proceed
 	waitUntil {!blck_MissionGoMajor};
 	// remove any alive AI hanging around from the last missions after waiting for the body clean up time
 	// and delete the groups they were associated with
 	_oldAI = blck_AIMajor;
-	[_oldAI] spawn blck_AICleanup;	
+	[_oldAI] spawn blck_AICleanup;
 	AllMissionCoords set [0,[0,0,0]];
 };

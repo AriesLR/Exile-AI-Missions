@@ -1,8 +1,8 @@
 /*
 	Influenced by code by blckeagls and Vampire and from Wicked AI for Arma 2.
-	Modified by Ghostrider
+	Modified by Ghostrider, Beefheart
 	Handles actions required at the time an AI unit is killed
-	Last updated 8/1/15
+	Last updated 8/28/15
 */
 private ["_unit","_killer","_startTime","_grpUnits","_alertDist","_intelligence","_weapons","_killersVehicle","_handle","_launcher","_runover","_unitMission"];
 _unit = _this select 0;
@@ -15,7 +15,7 @@ if (_alertDist > 0) then {
 		{
 			if (((position _x) distance (position _unit)) <= _alertDist) then {
 				_x reveal [_killer, _intelligence];
-				//diag_log "Killer revealed";
+				[2,"[AIKilled.sqf] Killer revealed"] call beef_fncUtil_Log;
 			}
 		} forEach allUnits;
 };
@@ -50,10 +50,10 @@ if (blck_useNVG) then
 		_unit unassignitem "NVGoggles"; _unit removeweapon "NVGoggles";
 	};
 };
-//diag_log format["[AIKilled.sqf] --- >>> unit %1 killed",_unit];
-[_unit] joinSilent grpNull;
+[2,format["[AIKilled.sqf] _unit %1 killed",_unit]] call beef_fncUtil_Log;
+[_unit] joinSilent ExileGraveyardGroup;
 // use the epoch cleanup routines to delete the ai corpse
-_unit setVariable ["LAST_CHECK", (diag_tickTime + blck_bodyCleanUpTimer)];
+// _unit setVariable ["LAST_CHECK", (diag_tickTime + blck_bodyCleanUpTimer)];
 
 
 _missionType = _unit getVariable ["Mission","none"];
@@ -141,14 +141,23 @@ if ( (typeOf vehicle _killer) in blck_forbidenVehicles or (currentWeapon _killer
 	};   
 };
 
+	private ["_newKillerScore","_killMessage"];
 	_newKillerScore = _killer getVariable ["ExileScore", 0];
 	_newKillerScore = _newKillerScore + blck_RespectGain;
 	_killer setVariable ["ExileScore", _newKillerScore];
 	format["setAccountScore:%1:%2", _newKillerScore,getPlayerUID _killer] call ExileServer_system_database_query_fireAndForget;
-	if (blck_brdcstkills) then {
+	
+	if (blck_brdcstkillmsg) then {
 		_killMessage = format ["AI was killed by %2. %1 respect gained", blck_RespectGain, (name _killer)];
 		["systemChatRequest", [_killMessage]] call ExileServer_system_network_send_broadcast;
 	};
+	if (blck_playerkillmsg) then {
+		private ["_sessionID"];
+		_killMessage = format ["AI killed for %1 respect.", blck_RespectGain];
+		_sessionID = _killer call ExileServer_system_session_getSessionId;
+		[_sessionID,"systemChatRequest",[_killMessage]] call ExileServer_system_network_send_to;
+	};
+	
 
 // unit cleanup depends on epoch cleanup; this code was left in the event that the epoch-cleanup approach no longer works properly.
 /*

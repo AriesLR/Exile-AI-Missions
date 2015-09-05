@@ -23,7 +23,7 @@ _compositions =
 ];
 
 _compSel = _compositions call BIS_fnc_selectRandom;
-diag_log format["[blckeagls] Red Mission composition = %1 ",_compSel];
+[0,format["[SM1.sqf] Red Mission composition = %1",_compSel]] call beef_fncUtil_Log;
 // Select a mission configuration and load the data into _missionCfg
 switch (_compositions call BIS_fnc_selectRandom) do 
 {
@@ -140,7 +140,7 @@ waitUntil{uiSleep 1; {(isPlayer _x) && ([_x,_crates,15] call blck_playerInRange)
 [_mines] call blck_clearMines;
 [_objects, blck_cleanupCompositionTimer] spawn blck_cleanupObjects;
 ["end",_endMsg,blck_RedMarker select 2] call blck_MessagePlayers;
-[blck_RedMarker select 1, "Red"] execVM "debug\missionCompleteMarker.sqf";
+//[blck_RedMarker select 1, "Red"] execVM "debug\missionCompleteMarker.sqf";
 [blck_RedMarker select 0] execVM "debug\deleteMarker.sqf";
 blck_RedMarker set [1,[0,0,0]];
 blck_RedMarker set [2,""];
@@ -148,5 +148,5 @@ if (blck_useSignalEnd) then
 {
 	[_crates select 0] call blck_signalEnd;
 };
-diag_log "[blckeagls] End of RED mission SM1";
+[0,"[SM1.sqf] RED mission ended"] call beef_fncUtil_Log;
 MissionGoMinor2 = false;

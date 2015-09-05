@@ -14,7 +14,7 @@ _default = [
 	],
 	[  // loot
 		["Box_NATO_Wps_F",[0,0,0],blck_BoxesLoot_Major2,blck_lootCountsMajor2],  // Standard loot crate with standard loadout
-		["Land_PaperBox_C_EPOCH",[-5,-5,0],blck_BoxesLoot_Major2,[0,0,0,10,10,3]]  	// No Weapons, Magazines, or optics; 10 each construction supplies and food/drink items, 3 backpacks
+		//["Land_PaperBox_C_EPOCH",[-5,-5,0],blck_BoxesLoot_Major2,[0,0,0,10,10,3]]  	// No Weapons, Magazines, or optics; 10 each construction supplies and food/drink items, 3 backpacks
 		//["Land_CargoBox_V1_F",[7, 5.4,0],_crateLoot/*blck_BoxLoot_Major*/,[0,15,7,10,0,0]]	 // Weapons, magazines, optics, nothing else
 	],
 	[],  // Loot Boxes - select 2

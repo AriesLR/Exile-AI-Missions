@@ -10,7 +10,7 @@
 	//diag_log format["signalEnd.sqf: _this = %1, _crate = %2",_this, _crate];
 	_smokeShell = ["SmokeShellOrange","SmokeShellBlue","SmokeShellPurple","SmokeShellRed","SmokeShellGreen","SmokeShellYellow"] call BIS_fnc_selectRandom;
 	_lightSource = ["Chemlight_green","Chemlight_red","Chemlight_yellow","Chemlight_blue"] call BIS_fnc_selectRandom;
-	diag_log format["signalEnd.sqf:  _smokeShell = %1",_smokeShell];
+	//diag_log format["signalEnd.sqf:  _smokeShell = %1",_smokeShell];
 	// Determine crate height. Method is from:
 	// https://community.bistudio.com/wiki/boundingBoxReal
 	_bbr = boundingBoxReal _crate;

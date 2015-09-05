@@ -7,7 +7,7 @@
 */
 
 private ["_coords","_allAIGroups","_mission","_Major2Missions","_oldAI"];
-diag_log "[blckeagls] GREEN mission timer started";
+[0,"[major2Timer.sqf] GREEN mission timer started"] call beef_fncUtil_Log;
 if (isNil "blck_AIMajor2") then { blck_AIMajor2 = [];};
 
 _Major2Missions = ["SM1"];
@@ -21,7 +21,7 @@ while {true} do {
 	AllMissionCoords set [1,_coords];	
 	_mission = _Major2Missions call BIS_fnc_selectRandom;
 	MissionGoMajor2 = true;
-	[_coords] execVM format["\q\addons\custom_server\AIMission\Major2\%1.sqf",_mission];
+	[_coords] execVM format["%1\AIMission\Major2\%2.sqf",BLCK_directory,_mission];
 	waitUntil {!MissionGoMajor2;};
 	AllMissionCoords set [1,[0,0,0]];
 	_oldAI = blck_AIMajor2;

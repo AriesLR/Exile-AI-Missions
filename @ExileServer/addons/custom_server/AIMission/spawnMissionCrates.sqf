@@ -30,7 +30,7 @@ _objs = [];
 	};
 	//diag_log format["spawnMissionCrates.sqf _pos = %1",_pos];		
 	_crate = createVehicle [_x select 0 /*vehicle type*/,_pos,[], 0, "CAN_COLLIDE"];
-	_crate setVariable ["LAST_CHECK", (diag_tickTime + 14400)];
+	//_crate setVariable ["LAST_CHECK", (diag_tickTime + 14400)];
 	_objs pushback _crate;
 	[_crate,_x select 2 /*loot array*/, _x select 3 /*array of values specifying number of items of each loot type to load*/] call blck_fillBoxes;
 }forEach _crates;
