@@ -43,3 +43,6 @@ Step 3b: Locate the following within those lines _bambiPlayer disableAI "TARGET"
 Step 4: Under that line paste the following _bambiPlayer addRating -3000;
 
 What this does is sets the player to “ENEMY” which will make all factions attack.
+
+
+Note: I don't know how or why, but people still find this repo. I haven't touched this in 9 years and don't have any plans to support it. Just thought I'd update the readme to clarify. I will however merge pull requests that are super old, so hopefully they fixed things properly.
