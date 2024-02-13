@@ -1,14 +1,15 @@
 /*
 Mission Compositions by Bill prepared for DBD Clan
+Modified by Beefheart
 */
 private ["_default","_resupplyCamp","_redCamp","_medicalCamp","_crateLoot"];
 
 
 _default = [
 	[  // select 0
-		"A group of Bandits was sighted in a nearby sector! Check the Blue marker on your map for the location!",
-		"The Sector at the Blue Marker is under survivor control!",												// Mission End message for player
-		"Bandit Patrol"	
+		"Mafia wants you to eliminate a police patrol in the blue sector. You will be rewarded with respect for each kill and may take their belongings.",
+		"The blue sector has been cleared!",												// Mission End message for player
+		"Police patrol"	
 	],
 	[  // select 1  Buildings
 	],

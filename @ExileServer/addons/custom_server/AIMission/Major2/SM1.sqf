@@ -1,13 +1,13 @@
 /*
   Spawn Green Mission
   Original Code by blckeagls
-  Modified by Ghostrider
-  Last modified 8/2/15
+  Modified by Ghostrider, Beefheart
+  Last modified 8/28/15
   See Major\SM1.sqf for comments
 */
 
 private ["_coords","_crates","_aiGroup","_numAIGrp","_arc","_dir","_dist","_xpos","_ypos","_newPos","_objects","_startMsg","_endMsg","_missionObjs","_compositions","_missionCfg","_compSel","_mines"];
-diag_log "[blckeagls] Starting GREEN mission SM1";
+[0,"Starting GREEN mission SM1"] call beef_fncUtil_Log;
 
 _coords = _this select 0;
 //diag_log format["Major2[Green]\SM1.sqf: _coords = %1",_coords];
@@ -16,7 +16,6 @@ _mines = [];
 _aiGroup = [];
 
 #include "\q\addons\custom_server\AIMission\Major2\compositions\compositionsGreen.sqf"; 
-
 _compositions = 
 [
 	"default"	
@@ -142,7 +141,7 @@ waitUntil{uiSleep 1; {(isPlayer _x) && ([_x,_crates,15] call blck_playerInRange)
 [_mines] call blck_clearMines;
 [_objects, blck_cleanupCompositionTimer] spawn blck_cleanupObjects;
 ["end",_endMsg,blck_GreenMarker select 2] call blck_MessagePlayers;
-[blck_GreenMarker select 1, "Green"] execVM "debug\missionCompleteMarker.sqf";
+//[blck_GreenMarker select 1, "Green"] execVM "debug\missionCompleteMarker.sqf";
 [blck_GreenMarker select 0] execVM "debug\deleteMarker.sqf";
 blck_GreenMarker set [1,[0,0,0]];
 blck_GreenMarker set [2,""];
@@ -152,4 +151,4 @@ if (blck_useSignalEnd) then
 	[_crates select 0] call blck_signalEnd;
 };
 MissionGoMajor2 = false;
-diag_log "[blckeagls] End of GREEN mission SM1";
+[0,"End of GREEN mission SM1"] call beef_fncUtil_Log;

@@ -6,22 +6,22 @@
 */
 // =========================================================================================================
 //  SAR_AI - DayZ AI library
-//  Version: 1.1.0 
-//  Author: Sarge (sarge@krumeich.ch) 
+//  Version: 1.1.0
+//  Author: Sarge (sarge@krumeich.ch)
 //
 //		Wiki: to come
 //		Forum: http://opendayz.net/index.php?threads/sarge-ai-framework-public-release.8391/
-//  
+//
 // ---------------------------------------------------------------------------------------------------------
 //   SAR_aihit.sqf
 //   last modified: 1.4.2013
 // ---------------------------------------------------------------------------------------------------------
 //  Parameters:
-//  [ _ai (AI unit that was killed, 
-//    _aikiller (unit that killed the AI)  
+//  [ _ai (AI unit that was killed,
+//    _aikiller (unit that killed the AI)
 //   ]
 
-// Modified by Ghostrider
+// Modified by Ghostrider, Beefheart
 // ------------------------------------------------------------------------------------------------------------
 
 
@@ -39,13 +39,11 @@ _aikiller_name = name _aikiller;
 _aikiller_side = side _aikiller;
 _aikiller_group_side = side (group _aikiller);
 
-if (blck_debugON && (isServer)) then {
-    diag_log format["blck_HITKILL_DEBUG: AI hit - Type: %1 Side: %3 Group Side: %4",_aikilled_type,_aikilled_side,_aikilled_group_side];
-    diag_log format["blck_HITKILL_DEBUG: AI attacker - Type: %1 Name: %2 Side: %3 Group Side: %4",_aikiller_type,_aikiller_name, _aikiller_side,_aikiller_group_side];
-};
+	[2,format ["[blck_AIHit] AI hit - Type: %1 Side: %3 Group Side: %4",_aikilled_type,_aikilled_side,_aikilled_group_side]] call beef_fncUtil_Log;
+	[2,format ["[blck_AIHit] AI attacker - Type: %1 Name: %2 Side: %3 Group Side: %4",_aikiller_type,_aikiller_name, _aikiller_side,_aikiller_group_side]] call beef_fncUtil_Log;
 
 if(isPlayer _aikiller) then {
-    
+
         {
             _x doTarget _aikiller;
             _x doFire _aikiller;

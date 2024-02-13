@@ -17,7 +17,7 @@ _aiGroup = [];
 #include "\q\addons\custom_server\AIMission\Major\compositions\compositionsOrange.sqf"; 
 
 // a listing of mission compositions for this mission set.
-_compositions = 
+_compositions =
 [
 	"resupplyCamp",
 	"default2",
@@ -25,10 +25,10 @@ _compositions =
 ];
 
 _compSel = _compositions call BIS_fnc_selectRandom;
-diag_log format["[blckeagls] Orange Mission composition = %1 ",_compSel];
+[0,format["[SM1.sqf] Orange Mission composition = %1",_compSel]] call beef_fncUtil_Log;
 
 //Load the  _missionCfg
-switch (_compositions call BIS_fnc_selectRandom) do 
+switch (_compositions call BIS_fnc_selectRandom) do
 {
 	case "default": {_missionCfg = _default};
 	case "default2": {_missionCfg = _default2};
@@ -43,7 +43,7 @@ _startMsg = _missionCfg select 0 select 0;
 _endMsg = _missionCfg select 0 select 1;
 //diag_log format["++++ SM1.sqf:  _startMsg = %1; _endMsg = %2", _startMsg,_endMsg];
 
-if (blck_labelMapMarkers select 0) then 
+if (blck_labelMapMarkers select 0) then
 {
 	//diag_log "SM1.sqf: labeling map markers *****";
 	blck_OrangeMarker set [2, (_missionCfg select 0 select 2)];
@@ -56,9 +56,9 @@ else
 blck_OrangeMarker set [3,blck_labelMapMarkers select 1];
 if (blck_preciseMapMarkers) then
 {
-	//diag_log "SM1.sqf:  Map marker will be PRECISELY at mission position";	
+	//diag_log "SM1.sqf:  Map marker will be PRECISELY at mission position";
 	blck_OrangeMarker set [1,_coords];
-} 
+}
 else
 {
 	//diag_log "SM1.sqf:  Map marker will be OFFSET from the mission position";
@@ -88,7 +88,7 @@ if (count (_missionCfg select 2) > 0) then   // Then there are specific loot cra
 else
 {  // otherwise spawn a default crate with default contents
 	//diag_log "SM1.sqf: Spawn Loot Crates";
-	_crates = [_coords,[[blck_crateTypes call BIS_fnc_selectRandom,[0,0,0],blck_BoxLoot_Major,blck_lootCountsMajor]]] call blck_spawnMissionCrates;
+	_crates = [_coords,[[blck_crateTypes call BIS_fnc_selectRandom,[0,0,0],blck_BoxesLoot_Major,blck_lootCountsMajor]]] call blck_spawnMissionCrates;
 };
 
 //diag_log "SM1.sqf: Spawn Smoking Wreck";
@@ -114,7 +114,7 @@ if (count (_missionCfg select 3) > 0) then
 
 //diag_log format["SM1.sqf: Spawn %1 Static Weapons",blck_useStatic];  uiSleep 1;
 // Spawn any  randomly generated static weapons and man them
-if (blck_useStatic) then 
+if (blck_useStatic) then
 {
 	if (blck_SpawnEmplaced_Major > 0) then
 	{
@@ -124,19 +124,19 @@ if (blck_useStatic) then
 			_static = _missionCfg select 4 select 1;
 			_count = _missionCfg select 4 select 0;
 		}
-		else  // Use the default static weapon parameters. 
+		else  // Use the default static weapon parameters.
 		{
 			//diag_log "sm1.sqf: default static spawns utilized";
 			_static = blck_staticWeapons;
 			_count = blck_SpawnEmplaced_Major;
-		};	
+		};
 		// spawn static weapons and assign AI to them; note that this function exits immediately if the _count == -1
 		_aiGroup = [_coords,_count,_static,35,50,"orange"] call  blck_spawnEmplacedWeapon;
 		blck_AIMajor = blck_AIMajor + _aiGroup;
 	};
 };
 
-if (blck_useVehiclePatrols) then 
+if (blck_useVehiclePatrols) then
 {
 	if (blck_SpawnVeh_Major > 0) then
 	{
@@ -146,14 +146,14 @@ if (blck_useVehiclePatrols) then
 			//diag_log "sm1.sqf: default AI Vehicle Patrol spawns utilized";
 			_veh = _missionCfg select 5 select 1;
 			_count = _missionCfg select 5 select 0;
-			
+
 		}
 		else  // Otherwise use the default parameters for vehicle patrols
-		{	
+		{
 			//diag_log "sm1.sqf: default AI Vehicle Patrol spawns utilized";
 			_count = blck_SpawnVeh_Major;
 			_veh = blck_AIPatrolVehicles;
-		};		
+		};
 		// Spawn the vehicle patrols and keep a record of any AI spawned so that they can be cleaned up later if necessary.  Note that the function exits immediately if the count of vehicle patrols is -1.
 		_aiGroup = [_coords,_count,_veh,45,60,"orange",3] call  blck_spawnVehiclePatrols;
 		blck_AIMajor = blck_AIMajor + _aiGroup;
@@ -161,7 +161,7 @@ if (blck_useVehiclePatrols) then
 };
 
 //  Spawn the mission AI and keep a log of the units spawned for cleanup; note that this function exits immediately if the _count == -1
-_aiGroup = [_coords,blck_MinAI_Major,blck_MaxAI_Major,"orange",blck_AIGrps_Major,20,40] call blck_spawnGroups;  
+_aiGroup = [_coords,blck_MinAI_Major,blck_MaxAI_Major,"orange",blck_AIGrps_Major,20,40] call blck_spawnGroups;
 blck_AIMajor = blck_AIMajor + _aiGroup;
 
 //Waits until player gets near the _crates to end mission
@@ -170,7 +170,7 @@ waitUntil{uiSleep 1; {(isPlayer _x) && ([_x,_crates,15] call blck_playerInRange)
 [_objects, blck_cleanupCompositionTimer] spawn blck_cleanupObjects;
 //Announce that the mission is complete
 ["end",_endMsg,blck_OrangeMarker select 2] call blck_MessagePlayers;
-[blck_OrangeMarker select 1, "Orange"] execVM "debug\missionCompleteMarker.sqf";
+//[blck_OrangeMarker select 1, "Orange"] execVM "debug\missionCompleteMarker.sqf";
 [blck_OrangeMarker select 0] execVM "debug\deleteMarker.sqf";
 blck_OrangeMarker set [1,[0,0,0]];
 blck_OrangeMarker set [2,""];
@@ -179,5 +179,5 @@ if (blck_useSignalEnd) then
 
 	[_crates select 0] call blck_signalEnd;
 };
-diag_log "[blckeagls] End of ORANGE mission SM1";
+[0,"[SM1.sqf] ORANGE mission ended"] call beef_fncUtil_Log;
 blck_MissionGoMajor = false;

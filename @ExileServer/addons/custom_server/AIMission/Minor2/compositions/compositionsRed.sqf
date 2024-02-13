@@ -5,9 +5,9 @@ private ["_default","_resupplyCamp","_redCamp","_medicalCamp","_crateLoot"];
 
 _default = [
 	[
-		"A group of Bandits was sighted in a nearby sector! Check the Red marker on your map for the location!",
-		"The Sector at the Red Marker is under survivor control!",												// Mission End message for player
-		"Bandit Patrol"			
+		"Mafia wants you to eliminate a police patrol in the red sector. You will be rewarded with respect for each kill and may take their belongings.",
+		"The red sector has been cleared!",
+		"Police patrol"
 	],
 	[  // select 1
 	],
