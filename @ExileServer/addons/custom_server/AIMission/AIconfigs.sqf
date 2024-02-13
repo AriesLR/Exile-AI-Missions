@@ -286,7 +286,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["optic_AMS_khk",1,3],["optic_AMS_snd",1,3],["optic_KHS_blk",1,3],["optic_KHS_hex",1,3],["optic_KHS_old",1,3],["optic_KHS_tan",1,3]
 			],
 			[//Items
-				["Rangefinder",1,3]
+				["Rangefinder",1,3],["Exile_Item_MetalPole"],["Exile_Item_JunkMetal"],["Exile_Item_CodeLock"],["Exile_Item_MetalBoard"]
 			],
 			[ // Backpacks
 				["B_AssaultPack_dgtl",1,2],["B_AssaultPack_khk",1,2],["B_AssaultPack_mcamo",1,2],["B_AssaultPack_ocamo",1,2],["B_AssaultPack_rgr",1,2],["B_AssaultPack_sgg",1,2],
